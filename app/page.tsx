@@ -25,32 +25,40 @@ export default function Page() {
 
   return (
     <>
-      <nav className="flex items-center justify-between p-6">
+      <nav className="flex items-center justify-between px-6 py-6 xl:justify-start xl:gap-16 xl:px-10 xl:text-base">
         <Link href="#">
           <Image src={logo} alt="" />
         </Link>
-        <button onClick={open}>
+        <button onClick={open} className="xl:hidden">
           <Image src={iconMenu} alt="" />
         </button>
 
-        <ul
+        <div
           className={clsx(
-            { "-z-50 translate-x-full opacity-0": !openMenu, "z-20": openMenu },
-            "fixed top-0 bottom-0 right-0 flex w-72 flex-col gap-4 bg-almost-white p-6 pt-20 text-medium-gray transition-transform xl:hidden"
+            {
+              "-z-50 translate-x-full opacity-0": !openMenu,
+              "z-20": openMenu,
+            },
+            "fixed top-0 bottom-0 right-0 flex w-72 flex-1 flex-col bg-almost-white p-6 pt-20 text-medium-gray transition xl:relative xl:top-auto xl:bottom-auto xl:right-auto xl:z-0 xl:w-auto xl:translate-x-0 xl:flex-row xl:items-center xl:justify-between xl:p-0 xl:opacity-100"
           )}
         >
-          <li>Features</li>
-          <li>Company</li>
-          <li>Careers</li>
-          <li>About</li>
-          <li className="mt-4">
-            <button className="w-full rounded-xl py-2">Login</button>
-          </li>
-          <li>
-            <button className="w-full rounded-xl border border-black py-2">
-              Register
-            </button>
-          </li>
+          <ul className="flex flex-col gap-8 xl:flex-row xl:items-center xl:gap-14">
+            <li>Features</li>
+            <li>Company</li>
+            <li>Careers</li>
+            <li>About</li>
+          </ul>
+
+          <ul className="flex flex-col gap-4 xl:flex-row">
+            <li className="mt-4 xl:mt-0">
+              <button className="w-full rounded-xl py-2 px-6">Login</button>
+            </li>
+            <li>
+              <button className="w-full rounded-xl border border-black px-6 py-2">
+                Register
+              </button>
+            </li>
+          </ul>
 
           <button
             onClick={close}
@@ -58,7 +66,7 @@ export default function Page() {
           >
             <Image src={iconClose} alt="" />
           </button>
-        </ul>
+        </div>
       </nav>
 
       <div
@@ -69,29 +77,31 @@ export default function Page() {
         )}
       ></div>
 
-      <Container className="text-center">
+      <Container className="xl:grid xl:grid-cols-2 xl:gap-48">
         <ImageSwitch
           mobileSrc={imageHeroMobile}
           desktopSrc={imageHeroDesktop}
         />
 
-        <h1 className="mt-12 text-4xl font-bold text-almost-black">
-          Make remote work
-        </h1>
-        <p className="mt-6 text-medium-gray">
-          Get your tema in sync, no matter your location. Streamline precesses,
-          create team rituals, and watch productivity soar.
-        </p>
+        <div className="text-center xl:order-first xl:flex xl:flex-col xl:justify-end xl:text-start">
+          <h1 className="mt-12 text-4xl font-bold text-almost-black xl:mt-0 xl:text-7xl">
+            Make <br className="hidden xl:inline" /> remote work
+          </h1>
+          <p className="mt-6 text-medium-gray xl:mt-12">
+            Get your team in sync, no matter your location. Streamline
+            precesses, create team rituals, and watch productivity soar.
+          </p>
 
-        <button className="mt-6 rounded-xl bg-almost-black py-3 px-6 text-almost-white">
-          Learn more
-        </button>
+          <button className="mt-6 w-max rounded-xl bg-almost-black py-3 px-6 text-almost-white xl:mt-12">
+            Learn more
+          </button>
 
-        <div className="mt-12 flex items-center justify-between gap-8">
-          <Image src={clientDatabiz} alt="" className="w-20" />
-          <Image src={clientAudiophile} alt="" className="w-14" />
-          <Image src={clientMeet} alt="" className="w-16" />
-          <Image src={clientMaker} alt="" className="w-16" />
+          <div className="mt-12 flex items-center justify-between gap-8 xl:mr-8 xl:mt-24">
+            <Image src={clientDatabiz} alt="" className="w-20 xl:w-24" />
+            <Image src={clientAudiophile} alt="" className="w-14 xl:w-16" />
+            <Image src={clientMeet} alt="" className="w-16 xl:w-20" />
+            <Image src={clientMaker} alt="" className="w-16 xl:w-20" />
+          </div>
         </div>
       </Container>
     </>

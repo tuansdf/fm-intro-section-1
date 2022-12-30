@@ -4,5 +4,9 @@ export default function Container({
   children,
   className,
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={"mx-auto max-w-sm " + className}>{children}</div>;
+  return (
+    <div className={"mx-auto max-w-sm xl:max-w-6xl " + className}>
+      {children}
+    </div>
+  );
 }
