@@ -11,17 +11,27 @@ import clientAudiophile from "/public/client-audiophile.svg";
 import clientDatabiz from "/public/client-databiz.svg";
 import clientMaker from "/public/client-maker.svg";
 import clientMeet from "/public/client-meet.svg";
+import iconArrowDown from "/public/icon-arrow-down.svg";
+import iconArrowUp from "/public/icon-arrow-up.svg";
+import iconCalendar from "/public/icon-calendar.svg";
 import iconClose from "/public/icon-close-menu.svg";
 import iconMenu from "/public/icon-menu.svg";
+import iconPlanning from "/public/icon-planning.svg";
+import iconReminders from "/public/icon-reminders.svg";
+import iconTodo from "/public/icon-todo.svg";
 import imageHeroDesktop from "/public/image-hero-desktop.png";
 import imageHeroMobile from "/public/image-hero-mobile.png";
 import logo from "/public/logo.svg";
 
 export default function Page() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
+  const [isCompanyOpen, setIsCompanyOpen] = useState(false);
 
-  const open = () => setOpenMenu(true);
-  const close = () => setOpenMenu(false);
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
+  const toggleFeatures = () => setIsFeaturesOpen((prev) => !prev);
+  const toggleCompany = () => setIsCompanyOpen((prev) => !prev);
 
   return (
     <>
@@ -29,22 +39,81 @@ export default function Page() {
         <Link href="#">
           <Image src={logo} alt="" />
         </Link>
-        <button onClick={open} className="xl:hidden">
+        <button onClick={openMenu} className="xl:hidden">
           <Image src={iconMenu} alt="" />
         </button>
 
         <div
           className={clsx(
             {
-              "-z-50 translate-x-full opacity-0": !openMenu,
-              "z-20": openMenu,
+              "-z-50 translate-x-full opacity-0": !isMenuOpen,
+              "z-20": isMenuOpen,
             },
             "fixed top-0 bottom-0 right-0 flex w-72 flex-1 flex-col bg-almost-white p-6 pt-20 text-medium-gray transition xl:relative xl:top-auto xl:bottom-auto xl:right-auto xl:z-0 xl:w-auto xl:translate-x-0 xl:flex-row xl:items-center xl:justify-between xl:p-0 xl:opacity-100"
           )}
         >
-          <ul className="flex flex-col gap-8 xl:flex-row xl:items-center xl:gap-14">
-            <li>Features</li>
-            <li>Company</li>
+          <ul className="flex flex-col gap-8 xl:flex-row xl:items-center xl:gap-12">
+            <li className="relative">
+              <button
+                onClick={toggleFeatures}
+                className={clsx(
+                  { "mb-8": isFeaturesOpen },
+                  "flex items-center gap-4 xl:mb-0"
+                )}
+              >
+                Features
+                {isFeaturesOpen ? (
+                  <Image src={iconArrowUp} alt="" />
+                ) : (
+                  <Image src={iconArrowDown} alt="" />
+                )}
+              </button>
+              <ul
+                className={clsx(
+                  { hidden: !isFeaturesOpen },
+                  "ml-6 space-y-6 overflow-hidden bg-almost-white transition-all xl:absolute xl:right-0 xl:top-full xl:mt-4 xl:ml-0 xl:w-max xl:rounded-xl xl:p-8 xl:drop-shadow-2xl"
+                )}
+              >
+                <li className="flex items-center gap-4">
+                  <Image src={iconTodo} alt="" width={22} /> Todo List
+                </li>
+                <li className="flex items-center gap-4">
+                  <Image src={iconCalendar} alt="" width={22} /> Calendar
+                </li>
+                <li className="flex items-center gap-4">
+                  <Image src={iconReminders} alt="" width={22} /> Reminders
+                </li>
+                <li className="flex items-center gap-4">
+                  <Image src={iconPlanning} alt="" width={22} /> Planning
+                </li>
+              </ul>
+            </li>
+            <li>
+              <button
+                onClick={toggleCompany}
+                className={clsx(
+                  { "mb-8": isCompanyOpen },
+                  "flex items-center gap-4 xl:mb-0"
+                )}
+              >
+                Company
+                {isCompanyOpen ? (
+                  <Image src={iconArrowUp} alt="" />
+                ) : (
+                  <Image src={iconArrowDown} alt="" />
+                )}
+              </button>
+              <ul
+                className={clsx(
+                  { hidden: !isCompanyOpen },
+                  "ml-6 space-y-6 overflow-hidden bg-almost-white transition-all xl:absolute xl:top-full xl:ml-0 xl:mt-4 xl:w-max xl:rounded-xl xl:p-8 xl:drop-shadow-2xl"
+                )}
+              >
+                <li>History</li>
+                <li>Our Team</li>
+                <li>Blog</li>
+              </ul>
+            </li>
             <li>Careers</li>
             <li>About</li>
           </ul>
@@ -61,7 +130,7 @@ export default function Page() {
           </ul>
 
           <button
-            onClick={close}
+            onClick={closeMenu}
             className="absolute top-0 right-0 m-6 xl:hidden"
           >
             <Image src={iconClose} alt="" />
@@ -70,9 +139,9 @@ export default function Page() {
       </nav>
 
       <div
-        onClick={close}
+        onClick={closeMenu}
         className={clsx(
-          { hidden: !openMenu },
+          { hidden: !isMenuOpen },
           "absolute inset-0 z-10 cursor-pointer bg-almost-black/50 transition-opacity xl:hidden"
         )}
       ></div>
