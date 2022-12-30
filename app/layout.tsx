@@ -1,5 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
 import { primaryFont } from "/app/fonts";
+import Header from "/app/header";
 import "/styles/globals.css";
 
 interface IProps {
@@ -17,7 +20,8 @@ export default function Layout({ children }: IProps) {
           primaryFont.className + " bg-almost-white text-lg font-medium"
         }
       >
-        <main>{children}</main>
+        <Header />
+        <main className="xl:mt-16">{children}</main>
       </body>
     </html>
   );
